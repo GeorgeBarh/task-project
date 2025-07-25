@@ -1,0 +1,79 @@
+<div class="main-group-container">
+  <app-nav style="height: 8%; width: 90%"></app-nav>
+
+  <div class="groups-section">
+    <!-- 🔍 Filters above groups -->
+    <!-- Filter section at top, horizontally aligned -->
+    <div class="group-filter-section">
+      <div class="filter-bar">
+        <div class="filter-input-wrapper">
+          <input
+            type="text"
+            [(ngModel)]="groupNameFilter"
+            placeholder="Search by name"
+            class="filter-input"
+            (input)="filteredGroups = getfilteredGroups()"
+          />
+        </div>
+
+        <div class="filter-input-wrapper">
+          <input
+            type="text"
+            [(ngModel)]="tagInput"
+            (keydown.enter)="addTag()"
+            placeholder="Add tag + Enter"
+            class="filter-input"
+          />
+        </div>
+
+        <div class="active-tags">
+          <div class="active-tag" *ngFor="let tag of tagFilters; let i = index">
+            {{ tag }}
+            <span (click)="removeTag(i)" class="remove-tag">✕</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Cards Grid -->
+    <div class="groups">
+      <div class="group">
+        <img
+          src="assets/Plus.png"
+          alt=""
+          class="add-group-image"
+          (click)="addTask()"
+        />
+      </div>
+      <div class="group" *ngFor="let group of filteredGroups">
+        <div class="group-name">{{ group.name }}</div>
+        <div class="group-description">{{ group.description }}</div>
+        <div class="group-tags">
+          <div class="group-tag" *ngFor="let tag of group.tags">{{ tag }}</div>
+        </div>
+        <div class="group-actions">
+          <button
+            class="group-tag"
+            style="color: black"
+            (click)="sendToTasks(group)"
+          >
+            View Group
+          </button>
+          <button
+            class="group-tag"
+            style="color: black"
+            (click)="showAddTaskDialog = true; groupToProcess = group"
+          >
+            Edit Group
+          </button>
+        </div>
+      </div>
+    </div>
+    @if(showAddTaskDialog) {
+    <app-group-details
+      (close)="onClose()"
+      [group]="groupToProcess"
+    ></app-group-details>
+    }
+  </div>
+</div>

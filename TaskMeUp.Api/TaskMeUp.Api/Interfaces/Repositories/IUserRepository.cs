@@ -1,4 +1,5 @@
 ﻿using TaskMeUp.Api.Entities;
+using Task = System.Threading.Tasks.Task;
 
 namespace TaskMeUp.Api.Interfaces.Repositories
 {

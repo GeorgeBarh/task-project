@@ -1,0 +1,9 @@
+<div class="navilus-body">
+  <div class="home-icon">
+    <img [src]="imagePath" [alt]="user?.username" (click)="sendMeHome()" />
+  </div>
+  <div class="user-controls">
+    <button class="nav-button" (click)="updateMe()">Update</button>
+    <button class="nav-button" (click)="logout()">Disconnect</button>
+  </div>
+</div>

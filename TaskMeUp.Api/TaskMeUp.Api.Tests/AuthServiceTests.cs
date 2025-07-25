@@ -7,6 +7,7 @@ using TaskMeUp.Api.Contracts.DTO;
 using TaskMeUp.Api.Entities;
 using TaskMeUp.Api.Interfaces.Repositories;
 using TaskMeUp.Api.Services;
+using Task = System.Threading.Tasks.Task;
 
 namespace TaskMeUp.Api.Tests
 {
@@ -48,7 +49,7 @@ namespace TaskMeUp.Api.Tests
         public async Task Login_ShouldCallDatabaseCorrectly()
         {
             // Arrange
-            var userDto = new UserDto { Username = "testuser", Password = "password123" };
+            var userDto = new PartialUserDto { Username = "testuser", Password = "password123" };
             var user = new User { Username = userDto.Username, PasswordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password) };
             _userRepositoryMock.Setup(repo => repo.GetUserByUsernameAsync(userDto.Username)).ReturnsAsync(user);
 

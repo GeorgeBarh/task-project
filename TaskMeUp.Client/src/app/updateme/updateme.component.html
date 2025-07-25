@@ -1,0 +1,60 @@
+<div class="main-update-container">
+  <app-nav style="height: 8%; width: 90%"></app-nav>
+  <div class="update-body">
+    <div class="update-logo-container">
+      <img [src]="'assets/user-portraits/' + newPortrait" alt="" class="logo" />
+      <select
+        id="portraits"
+        [(ngModel)]="newPortrait"
+        class="form__field"
+        [value]="newPortrait"
+      >
+        <option *ngFor="let portrait of availablePortraits" [value]="portrait">
+          {{ portrait }}
+        </option>
+      </select>
+    </div>
+    <div class="update-form">
+      <h2>Update your profile</h2>
+      <div class="form__group field">
+        <input
+          type="text"
+          class="form__field"
+          placeholder="Username"
+          name="newUsername"
+          id="newUsername"
+          required
+          [(ngModel)]="newUsername"
+        />
+        <label for="registerUsername" class="form__label">Username</label>
+      </div>
+      <div class="form__group field">
+        <input
+          type="password"
+          class="form__field"
+          placeholder="Password"
+          name="newPassword"
+          id="newPassword"
+          required
+          [(ngModel)]="newPassword"
+        />
+        <label for="newPassword" class="form__label">New Password</label>
+      </div>
+      <div class="form__group field">
+        <input
+          type="password"
+          class="form__field"
+          placeholder="Password"
+          name="OldPassword"
+          id="OldPassword"
+          required
+          [(ngModel)]="OldPassword"
+        />
+        <label for="OldPassword" class="form__label">Old Password</label>
+      </div>
+      <button (click)="updateMe()">Save Changes</button>
+      <p class="error-text">{{ errorTxt }}</p>
+      <button (click)="deleteMe()">Delete My Profile</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+.navilus-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.user-controls {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-button {
+  margin-top: 20px;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color, border-color, color, box-shadow, filter;
+  transition-duration: 0.3s;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 17px 48px;
+  color: #a04668;
+  background-color: #f9ebe0;
+  height: 5%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  transform: scale(1.04);
+  background-color: #a04668;
+  color: #f9ebe0;
+}
+
+.home-icon {
+  height: 100%;
+  width: 100px;
+}
+
+.home-icon img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.home-icon img:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .navilus-body {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
+  }
+
+  .home-icon {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+
+  .home-icon img {
+    width: 100%;
+    height: auto;
+  }
+
+  .user-controls {
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+  }
+  .home-icon {
+    width: 80px; /* smaller icon */
+    margin-bottom: 15px;
+  }
+
+  .home-icon img {
+    width: 100%;
+    height: auto;
+  }
+
+  .nav-button {
+    width: 100%;
+    padding: 12px 20px; /* smaller padding */
+    font-size: 14px; /* smaller text */
+    min-width: auto;
+    height: auto;
+    justify-content: center;
+  }
+}

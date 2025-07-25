@@ -2,10 +2,11 @@
 using TaskMeUp.Api.DAL;
 using TaskMeUp.Api.Entities;
 using TaskMeUp.Api.Interfaces.Repositories;
+using Task = System.Threading.Tasks.Task;
 
 namespace TaskMeUp.Api.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly MainDbContext context;
 
@@ -16,12 +17,12 @@ namespace TaskMeUp.Api.Repositories
 
         public async Task<User?> GetUserByIdAsync(Guid userId)
         {
-            return await context.Users.FindAsync(userId);
+            return await context.Users.Include(u => u.Groups).FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<User?> GetUserByUsernameAsync(string username)
         {
-            return await context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await context.Users.Include(u => u.Groups).FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<User> CreateUserAsync(User user)

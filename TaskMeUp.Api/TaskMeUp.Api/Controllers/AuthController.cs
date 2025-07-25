@@ -16,6 +16,7 @@ namespace TaskMeUp.Api.Controllers
         {
             this.authService = authService;
         }
+
         [HttpPost]
         public async Task<IActionResult> Register([FromBody][Required] UserDto userDto)
         {
@@ -30,7 +31,7 @@ namespace TaskMeUp.Api.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody][Required] UserDto userDto)
+        public async Task<IActionResult> Login([FromBody][Required] PartialUserDto userDto)
         {
             var result = await authService.Login(userDto);
             if (result.Success || result.ErrorCode != "InternalServerError")

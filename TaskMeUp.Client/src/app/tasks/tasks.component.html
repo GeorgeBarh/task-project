@@ -1,0 +1,73 @@
+<div class="main-tasks-container">
+  <app-nav style="height: 8%; width: 90%"></app-nav>
+  <button class="add-task-btn" (click)="showAddTaskDialog = true">
+    + Add Task
+  </button>
+  <div class="user-management-bar">
+    <div class="add-user-container">
+      <input
+        type="text"
+        placeholder="Username"
+        [(ngModel)]="newUsername"
+        class="username-input"
+      />
+      <button (click)="addUserToGroup(newUsername)" class="add-user-btn">
+        Add User
+      </button>
+    </div>
+
+    <div class="user-avatars">
+      <div
+        class="user-avatar"
+        *ngFor="let user of group?.users"
+        (click)="removeUserFromGroup(user.username)"
+        title="{{ user.username }}"
+      >
+        <img
+          [src]="'/assets/user-portraits/' + user.portrait"
+          [alt]="user.username"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="tasks-board">
+    <div
+      class="task-column"
+      *ngFor="let status of statusNames"
+      cdkDropList
+      #dropListRef="cdkDropList"
+      [cdkDropListData]="getTasksByStatus(status.enumValue)"
+      [cdkDropListConnectedTo]="connectedDropLists"
+      (cdkDropListDropped)="onTaskDrop($event, status.enumValue)"
+    >
+      <h3>{{ status.name }}</h3>
+
+      <div
+        class="task-card"
+        *ngFor="let task of getTasksByStatus(status.enumValue)"
+        cdkDrag
+        [cdkDragData]="task"
+        (click)="taskToProcess = task; showAddTaskDialog = true"
+      >
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <div class="assigned-user" *ngIf="task.assignedUser">
+          <img
+            [src]="'/assets/user-portraits/' + task.assignedUser.portrait"
+            alt="portrait"
+          />
+          <span>{{ task.assignedUser.username }}</span>
+        </div>
+        <small>Due: {{ task.dueDate | date : "mediumDate" }}</small>
+      </div>
+    </div>
+  </div>
+  @if(showAddTaskDialog) {
+  <app-task-details
+    (close)="onClose()"
+    [availableUsers]="availableUsers"
+    [groupId]="this.group?.id"
+    [task]="taskToProcess"
+  ></app-task-details>
+  }
+</div>

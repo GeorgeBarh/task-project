@@ -50,7 +50,8 @@ namespace TaskMeUp.Api.Services
                 {
                     Id = Guid.NewGuid(),
                     Username = userDto.Username,
-                    PasswordHash = passwordHash
+                    PasswordHash = passwordHash,
+                    Portrait = userDto.Portrait
                 };
                 var token = CreateToken(user);
 
@@ -78,7 +79,7 @@ namespace TaskMeUp.Api.Services
                 };
             }
         }
-        public async Task<ApiResult<UserInfoDto>> Login(UserDto userDto)
+        public async Task<ApiResult<UserInfoDto>> Login(PartialUserDto userDto)
         {
             try
             {
@@ -108,7 +109,16 @@ namespace TaskMeUp.Api.Services
                     Data = new UserInfoDto
                     {
                         Username = user.Username,
-                        Token = token
+                        Token = token,
+                        Portrait = user.Portrait,
+                        Groups = user.Groups.Select(s => new PartialGroup
+                        {
+                            Description = s.Description,
+                            Icon = s.Icon,
+                            Id = s.Id,
+                            Name = s.Name,
+                            Tags = s.Tags
+                        })
                     }
                 };
             }
@@ -155,7 +165,15 @@ namespace TaskMeUp.Api.Services
                     {
                         Username = user.Username,
                         Token = token,
-                        Portrait = user.Portrait
+                        Portrait = user.Portrait,
+                        Groups = user.Groups.Select(s => new PartialGroup
+                        {
+                            Description = s.Description,
+                            Icon = s.Icon,
+                            Id = s.Id,
+                            Name = s.Name,
+                            Tags = s.Tags
+                        })
                     }
                 };
             }
@@ -208,6 +226,7 @@ namespace TaskMeUp.Api.Services
                 // Update the user entity
                 user.Username = userDto.Username;
                 user.PasswordHash = passwordHash;
+                user.Portrait = userDto.Portrait;
                 var updatedUserInDb = await repo.UpdateUserAsync(user);
                 var token = CreateToken(updatedUserInDb);
                 return new ApiResult<UserInfoDto>
@@ -217,7 +236,15 @@ namespace TaskMeUp.Api.Services
                     {
                         Username = updatedUserInDb.Username,
                         Token = token,
-                        Portrait = updatedUserInDb.Portrait
+                        Portrait = updatedUserInDb.Portrait,
+                        Groups = updatedUserInDb.Groups.Select(s=>new PartialGroup
+                        {
+                            Description = s.Description,
+                            Icon = s.Icon,
+                            Id = s.Id,
+                            Name = s.Name,
+                            Tags = s.Tags
+                        })
                     }
                 };
             }

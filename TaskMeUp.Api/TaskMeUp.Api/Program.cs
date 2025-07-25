@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using TaskMeUp.Api;
 using TaskMeUp.Api.DAL;
 using TaskMeUp.Api.Interfaces.Repositories;
 using TaskMeUp.Api.Interfaces.Services;
@@ -13,7 +14,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MainDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IGroupService,GroupService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -59,6 +63,17 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+}); 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowLocalAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
 });
 
 var app = builder.Build();
@@ -72,9 +87,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowLocalAngularApp");
 
 app.UseAuthorization();
 
 app.MapControllers();
- 
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MainDbContext>();
+    context.Database.Migrate(); // optional
+    DatabaseSeeder.Seed(context);
+}
+
 app.Run();

@@ -1,0 +1,61 @@
+<div class="forms-container">
+  <div class="auth-form">
+    <h2>Login</h2>
+    <div class="form__group field">
+      <input
+        type="text"
+        class="form__field"
+        placeholder="Username"
+        name="loginUsername"
+        id="loginUsername"
+        required
+        [(ngModel)]="loginUsername"
+      />
+      <label for="loginUsername" class="form__label">Username</label>
+    </div>
+    <div class="form__group field">
+      <input
+        type="password"
+        class="form__field"
+        placeholder="Password"
+        name="loginPassword"
+        id="loginPassword"
+        required
+        [(ngModel)]="loginPassword"
+      />
+      <label for="loginPassword" class="form__label">Password</label>
+    </div>
+    <button (click)="login()">Log In</button>
+    <p class="error-text">{{ errorTxtLogin }}</p>
+  </div>
+
+  <div class="auth-form">
+    <h2>Sign up</h2>
+    <div class="form__group field">
+      <input
+        type="text"
+        class="form__field"
+        placeholder="Username"
+        name="registerUsername"
+        id="registerUsername"
+        required
+        [(ngModel)]="registerUsername"
+      />
+      <label for="registerUsername" class="form__label">Username</label>
+    </div>
+    <div class="form__group field">
+      <input
+        type="password"
+        class="form__field"
+        placeholder="Password"
+        name="registerPassword"
+        id="registerPassword"
+        required
+        [(ngModel)]="registerPassword"
+      />
+      <label for="registerPassword" class="form__label">Password</label>
+    </div>
+    <button (click)="register()">Sign up</button>
+    <p class="error-text">{{ errorTxtRegister }}</p>
+  </div>
+</div>

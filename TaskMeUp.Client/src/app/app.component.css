@@ -1,0 +1,15 @@
+.app-container {
+  width: 100vw;
+  height: 94vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #131516;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,147 @@
+.forms-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #131516;
+  gap: 20px;
+}
+
+.auth-form {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-form h2 {
+  color: #a04668;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  width: 80%;
+  text-align: left;
+  height: 1%;
+  font-size: normal;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 80%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #a04668;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #f9ebe0;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #a04668;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #a04668;
+  font-weight: 700;
+  opacity: 0.4;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #f9ebe0, #a04668);
+  border-bottom: 1px solid #a04668;
+  border-image-slice: 1;
+}
+
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.auth-form button {
+  margin-top: 20px;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color, border-color, color, box-shadow, filter;
+  transition-duration: 0.3s;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 17px 48px;
+  color: #a04668;
+  background-color: #f9ebe0;
+  height: 5%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form button:hover {
+  transform: scale(1.04);
+  background-color: #a04668;
+  color: #f9ebe0;
+}
+
+.error-text {
+  height: 1%;
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  font-size: smaller;
+  text-align: center;
+  color: #fc2d2d;
+}
+
+@media (max-width: 1165px) {
+  .forms-container {
+    flex-direction: column;
+  }
+  .auth-form {
+    width: 90%;
+  }
+}
