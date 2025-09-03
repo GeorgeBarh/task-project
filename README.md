@@ -7,12 +7,12 @@ It allows users to manage groups and tasks collaboratively with JWT-based authen
 
 ## Features
 
-- 🔑 **Authentication** – Register, login, update profile, delete account  
-- 👥 **Groups** – Create, update, delete groups, manage group membership  
-- ✅ **Tasks** – Create, update, delete tasks within groups  
-- 🔒 **Secure API** – JWT authentication with BCrypt password hashing  
-- 📖 **API Docs** – Swagger UI available for easy testing  
-- 🧪 **Testing** – xUnit & Moq (API), Karma/Jasmine (Client)  
+-  **Authentication** – Register, login, update profile, delete account  
+-  **Groups** – Create, update, delete groups, manage group membership  
+-  **Tasks** – Create, update, delete tasks within groups  
+-  **Secure API** – JWT authentication with BCrypt password hashing  
+-  **API Docs** – Swagger UI available for easy testing  
+-  **Testing** – xUnit & Moq (API), Karma/Jasmine (Client)  
 
 ---
 
